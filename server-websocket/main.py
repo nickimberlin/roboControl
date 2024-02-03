@@ -44,4 +44,7 @@ def control(message):
     left_right(data['data']['x'])
 
 if __name__ == "__main__":
-    socketio.run(app, host="0.0.0.0", debug=True, use_reloader=False)
+    socketio.run(app, host="0.0.0.0", debug=True, use_reloader=False, threaded=True)
+    # print the devices ip address for the user to connect to
+    import socket
+    print("Connect to: ", socket.gethostbyname(socket.gethostname()))
