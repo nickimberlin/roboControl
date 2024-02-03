@@ -17,18 +17,6 @@ h1{
     float:left;
 }
 
-.joystickzone-left{
-    float:left;
-    position:relative;
-    left:0px;
-    top:0px;
-    width:20%;
-    height:100%;
-    background-color:#ccc;
-    padding:0;
-    margin:0;
-}
-
 .infozone{
     float:left;
     background-color:#eee;
