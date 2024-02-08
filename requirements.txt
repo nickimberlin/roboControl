@@ -1,5 +1,8 @@
 Flask-SocketIO
+flask-cors
+flask
 python-engineio
 python-socketio
 opencv-python
 numpy
+virtualenv
