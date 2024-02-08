@@ -19,18 +19,17 @@
                 </div>
             </div>
             <div id="infozone" class="info_zone">
-                <p style="margin:0;padding:0;text-align:center;border-bottom:1px solid #333;">-=<| RoboControl v2.0 |>=-</p>
-                <p id="output" style="margin:0;padding:0;text-align:center;">Output</p>
+				<img class="responsive-iframe noSelect" src="{{ url_for('video_feed') }}"></img>
             </div>
 
             <div id="buttonzone">
-                <div id="button1" class="button buttonA noSelect"></div>
-                <div id="button2" class="button buttonB noSelect" style="float:right;"></div>
+                <div id="button1" class="button noSelect"> Enable Camera</div>
+                <div id="button2" class="button noSelect" style="float:right;"> Disable Camera</div>
             </div>
 
             <div id="joystickzone" style="display: flex; justify-content:space-around; width: auto;">
-                <div id="joystick1" style="width: 200px; height: 200px;"></div>
-                <div id="joystick2" style="width: 200px; height: 200px;"></div>
+                <div id="joystick1" class="noSelect" style="width: 200px; height: 200px;"></div>
+                <div id="joystick2" class="noSelect" style="width: 200px; height: 200px;"></div>
             </div>
         </div>
 
@@ -43,27 +42,27 @@
 			var socketJoystick2 = io.connect('http://'+location.host+"/joystick2");
 
             $(document).ready(function(){
-
+				
 				/******************************************
 				  SOCKET STATUS
 				  *****************************************/
 				socket.on('connect', function(){
 					console.log("connected");
-					$('#output').text("socket connected");
+					// $('#output').text("socket connected");
 					$('#connex').html('<div class="led-box"><div class="led-blue"></div><div class="led-text">Connected</div></div>');
 					socket_status.emit('status', {data:"connected"});
 				});
 
 				socket.on('disconnect', function(){
 					console.log("disconnected");
-					$('#output').text("socket disconnected");
+					// $('#output').text("socket disconnected");
 					$('#connex').html('<div class="led-box"><div class="led-red"></div><div class="led-text">Not Connected</div></div>');
 					socket_status.emit('status', {data:"disconnected"});
 				});
 
 				socket.on('reconnect', function(){
 					console.log("reconnected");
-					$('#output').text("socket reconnected");
+					// $('#output').text("socket reconnected");
 					$('#connex').html('<div class="led-box"><div class="led-blue"></div><div class="led-text">Connected</div></div>');
 					socket_status.emit('status', {data:"reconnected"});
 				});
@@ -72,13 +71,13 @@
                   BUTTONS
                   *****************************************/
                 $(document).on('click', '#button1', function(evt){
-                    $('#output').html("Button1");
+                    // $('#output').html("Button1");
 					console.log("Button1");
                     socket_control.emit('control', {data:{"A":1}});
                     evt.preventDefault();
                 });
                 $(document).on('click', '#button2', function(evt){
-					$('#output').html("Button2");
+					// $('#output').html("Button2");
 					console.log("Button2");
                     socket_control.emit('control', {data:{"B":1}});
                     evt.preventDefault();
@@ -96,11 +95,11 @@
                 };
 				var joystick1 = nipplejs.create(options1);
 				joystick1.on('move', function (evt, data) {
-					$('#output').html("Joystick1: "+data.vector.x+","+data.vector.y+"");
+					// $('#output').html("Joystick1: "+data.vector.x+","+data.vector.y+"");
 					socketJoystick1.emit('joystick1', {data:{"x":data.vector.x, "y":data.vector.y}});
 				});
 				joystick1.on('end', function(evt, data) {
-					$('#output').html("Joystick1: 0,0");
+					// $('#output').html("Joystick1: 0,0");
 					socketJoystick1.emit('joystick1', {data:{"x":0, "y":0}});
 				});
 
@@ -116,14 +115,13 @@
                 };
                 var joystick2 = nipplejs.create(options2);
                 joystick2.on('move', function (evt, data) {
-					$('#output').html("Joystick2: "+data.vector.x+","+data.vector.y+"");
+					// $('#output').html("Joystick2: "+data.vector.x+","+data.vector.y+"");
 					socketJoystick2.emit('joystick2', {data:{"x":data.vector.x, "y":data.vector.y}});
 				});
 				joystick2.on('end', function(evt, data) {
-					$('#output').html("Joystick2: 0,0");
+					// $('#output').html("Joystick2: 0,0");
 					socketJoystick2.emit('joystick2', {data:{"x":0, "y":0}});
 				});
-
 
                 window.oncontextmenu = function(evt){
                     evt.preventDefault();
