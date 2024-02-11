@@ -3,6 +3,6 @@ flask-cors
 flask
 python-engineio
 python-socketio
-# opencv-python Defer to the download of the wheel file
+opencv-python
 numpy
 virtualenv
