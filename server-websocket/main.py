@@ -29,7 +29,6 @@ def control(message):
     data = message
     print(data)
     control_motors(data['data'])
-    # forward_backward(data['data']['y'])
 
 # @socketio.on('joystick2', namespace='/joystick2')
 # def control(message):
@@ -38,7 +37,6 @@ def control(message):
 
 @app.route('/video_feed')
 def video_feed():
-    # return Response(gen(), mimetype='multipart/x-mixed-replace; boundary=frame')
     return Response(videoStream(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == "__main__":
