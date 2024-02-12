@@ -35,5 +35,6 @@
 
 # # Control Both Motors
 def control_motors(data):
+    print(data)
     kit.motor1.throttle = data['x']
     kit.motor2.throttle = data['y']
