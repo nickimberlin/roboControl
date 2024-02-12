@@ -4,7 +4,7 @@ from flask_cors import CORS
 
 # importing Camera and Robot controls
 from camera import videoStream
-from robot import control_motors
+from robot import left_right, forward_backward
 
 _debug = False
 
@@ -27,13 +27,12 @@ def default_error_handler(e):
 @socketio.on('joystick1', namespace='/joystick1')
 def control(message):
     data = message
-    print(data)
-    control_motors(data['data'])
+    forward_backward(data['data']['y'])
 
-# @socketio.on('joystick2', namespace='/joystick2')
-# def control(message):
-#     data = message
-#     left_right(data['data']['x'])
+@socketio.on('joystick2', namespace='/joystick2')
+def control(message):
+    data = message
+    left_right(data['data']['x'])
 
 @app.route('/video_feed')
 def video_feed():
